@@ -1,0 +1,9 @@
+= Rest Docs Practice Application API Document
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sentlinks:
+
+include::member.adoc[]
+include::post.adoc[]

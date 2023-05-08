@@ -1,0 +1,16 @@
+== 게시글
+
+=== 게시글 전체 조회
+operation::post-get-all[snippets='http-request,http-response']
+
+=== 게시글 1개 조회
+operation::post-get-one[snippets='http-request,http-response']
+
+=== 게시글 등록
+operation::post-create[snippets='http-request,http-response']
+
+=== 게시글 수정
+operation::post-update[snippets='http-request,http-response']
+
+=== 게시글 삭제
+operation::post-delete[snippets='http-request,http-response']

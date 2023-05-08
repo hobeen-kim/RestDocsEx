@@ -1,0 +1,10 @@
+== 멤버
+
+=== 회원가입
+operation::member-signup[snippets='http-request,http-response']
+
+=== 로그인
+operation::member-login[snippets='http-request,http-response']
+
+=== 멤버 삭제
+operation::member-delete[snippets='http-request,http-response']
