@@ -1,12 +1,11 @@
 package restapi.restdocs.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -30,6 +29,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
@@ -51,17 +51,18 @@ class PostControllerTest {
 
     @Test
     void create() throws Exception {
+        // Change the postResponse object
         final PostResponse postResponse = new PostResponse(1L, "title", "content");
         when(postService.create(any())).thenReturn(postResponse);
 
-        this.mockMvc.perform(post("/posts") // 1
-                        .content("{\"title\": \"title\", \n\"content\": \"content\"}") // 2
-                        .contentType(MediaType.APPLICATION_JSON)) // 3
-                .andExpect(status().isCreated()) // 4
-                .andDo(document("post-create", // 5
-                        requestFields( // 6
-                                fieldWithPath("title").description("Post 제목"), // 7
-                                fieldWithPath("content").description("Post 내용").optional() // 8
+        this.mockMvc.perform(post("/posts")
+                        .content("{\"title\": \"title\", \n\"content\": \"content\"}")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated()) // Change the expected status code
+                .andDo(document("post-create",
+                        requestFields(
+                                fieldWithPath("title").description("Post 제목"),
+                                fieldWithPath("content").description("Post 내용").optional()
                         )
                 ));
     }
@@ -75,9 +76,13 @@ class PostControllerTest {
 
         when(postService.findAll()).thenReturn(postResponses);
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        String expectedJson = objectMapper.writeValueAsString(postResponses);
+
         this.mockMvc.perform(get("/posts")
                         .accept(MediaType.APPLICATION_JSON)) // 1
                 .andExpect(status().isOk())
+                .andExpect(content().json(expectedJson)) // Compare the response body with the expected JSON
                 .andDo(document("post-get-all",
                         responseFields( // 2
                                 fieldWithPath("[].id").description("Post Id"), // 3
@@ -110,7 +115,7 @@ class PostControllerTest {
     @Test
     void update() throws Exception {
         this.mockMvc.perform(put("/posts/{postId}", 1L)
-                        .content("{\"title\": \"turtle\", \n\"content\": \"context\"}")
+                        .content("{\"title\": \"title\", \n\"content\": \"context\"}")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document("post-update",

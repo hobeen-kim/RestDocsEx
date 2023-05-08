@@ -3,7 +3,7 @@
 :source-highlighter: highlightjs
 :toc: left
 :toclevels: 2
-:sentlinks:
+:sectlinks:
 
 include::member.adoc[]
 include::post.adoc[]

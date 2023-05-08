@@ -7,6 +7,7 @@ import restapi.restdocs.dto.PostResponse;
 import restapi.restdocs.service.PostService;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/posts")
@@ -27,6 +28,9 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<List<PostResponse>> findAll() {
+
+
+
         return ResponseEntity.ok(postService.findAll());
     }
 
