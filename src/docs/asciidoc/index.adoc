@@ -4,6 +4,8 @@
 :toc: left
 :toclevels: 2
 :sectlinks:
+:docinfo: shared-head
 
+include::overview.adoc[]
 include::member.adoc[]
 include::post.adoc[]

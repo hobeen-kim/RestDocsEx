@@ -1,9 +1,11 @@
 package restapi.restdocs.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restapi.restdocs.dto.PostRequest;
 import restapi.restdocs.dto.PostResponse;
+import restapi.restdocs.entity.Post;
 import restapi.restdocs.service.PostService;
 
 import java.net.URI;
@@ -21,7 +23,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostResponse> create(@RequestBody final PostRequest postRequest) {
+    public ResponseEntity<PostResponse> create(@RequestBody @Valid PostRequest postRequest) {
         final PostResponse postResponse = postService.create(postRequest);
         return ResponseEntity.created(URI.create("/posts/" + postResponse.getId())).build();
     }
@@ -40,9 +42,9 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<Void> update(@PathVariable final Long postId, @RequestBody PostRequest postRequest) {
+    public ResponseEntity<PostResponse> update(@PathVariable final Long postId, @RequestBody PostRequest postRequest) {
         postService.update(postId, postRequest);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(postService.update(postId, postRequest));
     }
 
     @DeleteMapping("/{postId}")

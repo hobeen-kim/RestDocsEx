@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description|Contraints|Optional
+
+{{#fields}}
+|{{#tableCellContent}}`+{{path}}+`{{/tableCellContent}}
+|{{#tableCellContent}}`+{{type}}+`{{/tableCellContent}}
+|{{#tableCellContent}}{{description}}{{/tableCellContent}}
+|{{#tableCellContent}}{{#constraints}}{{.}}{{/constraints}}{{/tableCellContent}}
+|{{#tableCellContent}}{{^optional}}No{{/optional}}{{#optional}}Yes{{/optional}}{{/tableCellContent}}
+
+{{/fields}}
+|===

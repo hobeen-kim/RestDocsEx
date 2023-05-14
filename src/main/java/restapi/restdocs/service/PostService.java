@@ -33,12 +33,14 @@ public class PostService {
         return PostResponse.of(postRepository.save(postRequest.toEntity()));
     }
 
-    public void update(Long postId, PostRequest postRequest) {
+    public PostResponse update(Long postId, PostRequest postRequest) {
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 없습니다. postId=" + postId));
         post.setTitle(postRequest.getTitle());
         post.setContent(postRequest.getContent());
         postRepository.save(post);
+
+        return PostResponse.of(post);
     }
 
     public void delete(Long postId) {

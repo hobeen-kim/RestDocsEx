@@ -22,8 +22,12 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
+
+    compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok' // 테스트 의존성 추가
+	testAnnotationProcessor 'org.projectlombok:lombok' // 테스트 의존성 추가
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//spring rest docs
 	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
@@ -33,6 +37,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	//h2 db 추가
 	implementation 'com.h2database:h2'
+
+	//spring validation 추가
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//test 용 spring validation 추가
+	testImplementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 ext {

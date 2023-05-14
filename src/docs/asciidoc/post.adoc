@@ -1,16 +1,16 @@
 == 게시글
 
 === 게시글 전체 조회
-operation::post-get-all[snippets='http-request,http-response']
+operation::Post/findAll[snippets='http-request,http-response,response-fields']
 
 === 게시글 1개 조회
-operation::post-get-one[snippets='http-request,http-response']
+operation::Post/findById[snippets='http-request,path-parameters,http-response,response-fields']
 
 === 게시글 등록
-operation::post-create[snippets='http-request,http-response']
+operation::Post/create[snippets='http-request,request-fields,http-response']
 
 === 게시글 수정
-operation::post-update[snippets='http-request,http-response']
+operation::Post/update[snippets='http-request,path-parameters,request-fields,http-response,response-fields']
 
 === 게시글 삭제
-operation::post-delete[snippets='http-request,http-response']
+operation::Post/remove[snippets='http-request,path-parameters,http-response']
